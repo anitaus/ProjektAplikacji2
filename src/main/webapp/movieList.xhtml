@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet name="css/primeflex.min.css"/>
+    <style type="text/css">
+        button.ui-button {
+            margin-right: .5rem;
+        }
+    </style>
+</h:head>
+<h:body>
+    <br/>
+    <p:growl id="messages" showDetail="true"/>
+
+    <p:toolbar>
+        <p:toolbarGroup>
+            <p:link outcome="index?faces-redirect=true">
+                <p:button icon="pi pi-home" styleClass="ui-button-help"/>
+            </p:link>
+            <p:link outcome="addMovie?faces-redirect=true">
+                <p:button icon="pi pi-file" styleClass="p-mr-2" value="New"/>
+            </p:link>
+        </p:toolbarGroup>
+        <p:toolbarGroup align="right">
+            <h:form>
+                <p:commandButton value="Logout" action="#{loginBB.logout}"/>
+            </h:form>
+        </p:toolbarGroup>
+    </p:toolbar>
+    <br/>
+    <p:dataTable value="#{movieListBB.all}" var="movie">
+        <p:column>
+            <f:facet name="header">ID:</f:facet>
+            #{movie.id}
+        </p:column>
+        <p:column>
+            <f:facet name="header">Title:</f:facet>
+            #{movie.title}
+        </p:column>
+        <p:column>
+            <f:facet name="header">Genre:</f:facet>
+            #{movie.genre.name}
+        </p:column>
+        <p:column>
+            <f:facet name="header">Release date:</f:facet>
+            #{movie.releaseDate}
+        </p:column>
+        <p:column>
+            <f:facet name="header">Price:</f:facet>
+            #{movie.price}
+        </p:column>
+        <p:column>
+            <f:facet name="header">www:</f:facet>
+            <h:outputLink value="//#{movie.www}">#{movie.www}</h:outputLink>
+        </p:column>
+        <p:column>
+            <f:facet name="header">Available</f:facet>
+            #{movie.available}
+        </p:column>
+        <p:column>
+            <f:facet name="header">Description:</f:facet>
+            #{movie.description}
+        </p:column>
+        <p:column>
+            <f:facet name="header">Action</f:facet>
+            <h:form>
+                <p:commandButton type="submit" icon="pi pi-user-edit"
+                                 styleClass="ui-button-raised ui-button-success ui-button-flat"
+                action="#{movieListBB.movieEdit(movie)}"/>
+                <p:commandButton type="submit" icon="pi pi-times"
+                                 styleClass="ui-button-raised ui-button-danger ui-button-flat"
+                                 action="#{movieEditBB.delete(movie)}"/>
+            </h:form>
+        </p:column>
+    </p:dataTable>
+</h:body>
+</html>
+

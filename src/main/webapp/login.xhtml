@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet name="css/primeflex.min.css"/>
+    <style type="text/css">
+        button.ui-button {
+            margin-right: .5rem;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="p-grid">
+        <div class="p-col">
+            <h:form>
+            <h5 class="p-mt-0">Login:</h5>
+            <div class="p-field p-grid">
+                <p:outputLabel for="login" styleClass="p-col-fixed" style="width:100px" value="Email: "/>
+                <div class="p-col">
+                    <p:inputText id="login" value="#{loginBB.email}" required="true"/>
+                </div>
+            </div>
+
+            <div class="p-field p-grid">
+                <p:outputLabel for="password" styleClass="p-col-fixed" style="width:100px" value="Password: "/>
+                <div class="p-col">
+                    <p:password id="password" value="#{loginBB.password}" required="true"/>
+                </div>
+            </div>
+            <p:commandButton update="@form" value="Login" type="submit" action="#{loginBB.validate}"/>
+        </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

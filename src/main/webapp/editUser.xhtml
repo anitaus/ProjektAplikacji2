@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet name="css/primeflex.min.css"/>
+    <style type="text/css">
+        button.ui-button {
+            margin-right: .5rem;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <br/>
+    <p:growl id="messages" showDetail="true"/>
+    <p:toolbar>
+        <p:toolbarGroup>
+            <p:link outcome="index?faces-redirect=true">
+                <p:button icon="pi pi-home" styleClass="ui-button-help"/>
+            </p:link>
+            <p:link outcome="userList?faces-redirect=true">
+                <p:button icon="pi pi-list" value="Users" styleClass="ui-button-secondary"/>
+            </p:link>
+        </p:toolbarGroup>
+        <p:toolbarGroup align="right">
+            <h:form>
+                <p:commandButton value="Logout" action="#{loginBB.logout}"/>
+            </h:form>
+        </p:toolbarGroup>
+    </p:toolbar>
+    <br/>
+    <p:panel header="Edit user">
+        <h:form>
+            <div class="p-field p-grid">
+                <label for="firstName" class="p-col-fixed" style="width:100px">Firstname: </label>
+                <div class="p-col">
+                    <p:inputText id="firstName" type="text" value="#{user.firstName}"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="lastName" class="p-col-fixed" style="width:100px">Lastname: </label>
+                <div class="p-col">
+                    <p:inputText id="lastName" type="text" value="#{user.lastName}"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="email" class="p-col-fixed" style="width:100px">Email: </label>
+                <div class="p-col">
+                    <p:inputText id="email" type="text" value="#{user.email}"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="password" class="p-col-fixed" style="width:100px">Password: </label>
+                <div class="p-col">
+                    <p:inputText id="password" type="text" value="#{user.password}"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="userType" class="p-col-fixed" style="width:100px">User type: </label>
+                <div class="p-col">
+                    <p:selectOneButton id="userType" value="#{user.userType}">
+                        <f:selectItem itemLabel="ADMIN" itemValue="ADMIN_ROLE"/>
+                        <f:selectItem itemLabel="USER" itemValue="USER_ROLE"/>
+                    </p:selectOneButton>
+                </div>
+            </div>
+            <p:commandButton type="submit" icon="pi pi-save" value="Save" action="#{userEditBB.save(user)}"
+                             update="@form"/>
+        </h:form>
+    </p:panel>
+</h:body>
+</html>

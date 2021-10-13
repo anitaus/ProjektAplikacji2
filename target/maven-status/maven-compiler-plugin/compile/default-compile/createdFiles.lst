@@ -1,0 +1,6 @@
+com\videorental\entity\User.class
+com\videorental\bean\UserBean.class
+com\videorental\type\UserType.class
+com\videorental\servlet\HelloServlet.class
+com\videorental\dao\UserDao.class
+com\videorental\dao\DAO.class

@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <h:outputStylesheet name="css/primeflex.min.css"/>
+    <style type="text/css">
+        button.ui-button {
+            margin-right: .5rem;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <br/>
+    <p:growl id="messages" showDetail="true"/>
+    <p:toolbar>
+        <p:toolbarGroup>
+            <p:link outcome="index?faces-redirect=true">
+                <p:button icon="pi pi-home" styleClass="ui-button-help"/>
+            </p:link>
+        </p:toolbarGroup>
+        <p:toolbarGroup align="right">
+            <h:form>
+                <p:commandButton value="Logout" action="#{loginBB.logout}"/>
+            </h:form>
+        </p:toolbarGroup>
+    </p:toolbar>
+    <br/>
+    <p:panel header="Main menu">
+        <div class="p-grid">
+            <c:if test="#{loginBB.admin}">
+                <p:link outcome="userList?faces-redirect=true">
+                    <p:button class="p-col-12 p-md-6 p-lg-3" styleClass="ui-button-raised ui-button-secondary ui-button-flat" value="Users"/>
+                </p:link>
+            </c:if>
+            <c:if test="#{loginBB.admin}">
+                <p:link outcome="customerList?faces-redirect=true">
+                    <p:button class="p-col-12 p-md-6 p-lg-3" styleClass="ui-button-raised ui-button-secondary ui-button-flat" value="Customers"/>
+                </p:link>
+            </c:if>
+            <c:if test="#{loginBB.admin}">
+                <p:link outcome="movieList?faces-redirect=true">
+                    <p:button class="p-col-12 p-md-6 p-lg-3" styleClass="ui-button-raised ui-button-secondary ui-button-flat" value="Movies"/>
+                </p:link>
+            </c:if>
+            <p:link outcome="orderList?faces-redirect=true">
+                <p:button class="p-col-12 p-md-6 p-lg-3" styleClass="ui-button-raised ui-button-secondary ui-button-flat" value="Order"/>
+            </p:link>
+        </div>
+    </p:panel>
+</h:body>
+</html>

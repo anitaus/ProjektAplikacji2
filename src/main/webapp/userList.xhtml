@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet name="css/primeflex.min.css"/>
+    <style type="text/css">
+        button.ui-button {
+            margin-right: .5rem;
+        }
+    </style>
+</h:head>
+<h:body>
+        <br/>
+        <p:growl id="messages" showDetail="true"/>
+
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:link outcome="index?faces-redirect=true">
+                    <p:button icon="pi pi-home" styleClass="ui-button-help"/>
+                </p:link>
+                <p:link outcome="addUser?faces-redirect=true">
+                    <p:button icon="pi pi-file" styleClass="p-mr-2" value="New"/>
+                </p:link>
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
+                <h:form>
+                    <p:commandButton value="Logout" action="#{loginBB.logout}"/>
+                </h:form>
+            </p:toolbarGroup>
+        </p:toolbar>
+        <br/>
+        <p:dataTable value="#{userListBB.all}" var="user">
+            <p:column>
+                <f:facet name="header">ID:</f:facet>
+                #{user.id}
+            </p:column>
+            <p:column>
+                <f:facet name="header">First Name:</f:facet>
+                #{user.firstName}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Last Name:</f:facet>
+                #{user.lastName}
+            </p:column>
+            <p:column>
+                <f:facet name="header">E-mail:</f:facet>
+                #{user.email}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Password:</f:facet>
+                #{user.password}
+            </p:column>
+            <p:column>
+                <f:facet name="header">User Type:</f:facet>
+                #{user.userType}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Action</f:facet>
+                <h:form>
+
+                    <p:commandButton type="submit" icon="pi pi-user-edit"
+                                     styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                     action="#{userListBB.userEdit(user)}"/>
+                    <p:commandButton type="submit" icon="pi pi-times"
+                                     styleClass="ui-button-raised ui-button-danger ui-button-flat"
+                                     action="#{userEditBB.delete(user)}"/>
+                </h:form>
+            </p:column>
+        </p:dataTable>
+</h:body>
+</html>

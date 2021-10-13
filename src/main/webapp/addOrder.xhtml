@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <meta http-equiv="refresh"/>
+    <h:outputStylesheet name="css/primeflex.min.css"/>
+    <style type="text/css">
+        button.ui-button {
+            margin-right: .5rem;
+        }
+    </style>
+</h:head>
+<f:view>
+    <div class="p-grid">
+        <div class="p-col">
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:link outcome="index?faces-redirect=true">
+                        <p:button icon="pi pi-home" styleClass="ui-button-help"/>
+                    </p:link>
+                    <p:link outcome="orderList?faces-redirect=true">
+                        <p:button icon="pi pi-list" value="Orders" styleClass="ui-button-secondary"/>
+                    </p:link>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <h:form>
+                        <p:commandButton value="Logout" action="#{loginBB.logout}"/>
+                    </h:form>
+                </p:toolbarGroup>
+            </p:toolbar>
+        </div>
+    </div>
+    <div class="p-grid">
+        <div class="p-col-6">
+            <h:form>
+                <p:panel header="Add movie order">
+                    <div class="p-field p-grid">
+                        <label for="title" class="p-col-fixed" style="width:100px">Title: </label>
+                        <div class="p-col">
+                            <p:selectOneMenu id="title" value="#{movieEditBB.movie.id}">
+                                <c:forEach items="#{movieListBB.byAvailability}" var="movie">
+                                    <f:selectItem itemLabel="#{movie.title}" itemValue="#{movie.id}"/>
+                                </c:forEach>
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="customer" class="p-col-fixed" style="width:100px">Customer: </label>
+                        <div class="p-col">
+                            <p:selectOneMenu id="customer" value="#{customerEditBB.customer.id}">
+                                <c:forEach items="#{customerListBB.all}" var="customer">
+                                    <f:selectItem itemLabel="#{customer.firstName} #{customer.lastName}"
+                                                  itemValue="#{customer.id}"/>
+                                </c:forEach>
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="calendar" class="p-col-fixed" style="width:100px">Return date: </label>
+                        <div class="p-col">
+                            <p:calendar id="calendar" value="#{orderEditBB.order.returnDate}">
+                            </p:calendar>
+                        </div>
+                    </div>
+                    <p:commandButton type="submit" icon="pi pi-save" value="Save"
+                                     action="#{orderEditBB.save(orderEditBB.order,movieEditBB.movie.id, customerEditBB.customer.id)}"
+                                     update="@form"/>
+                </p:panel>
+            </h:form>
+        </div>
+    </div>
+</f:view>
+</html>

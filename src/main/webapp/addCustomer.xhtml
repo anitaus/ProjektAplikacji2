@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet name="css/primeflex.min.css"/>
+    <style type="text/css">
+        button.ui-button {
+            margin-right: .5rem;
+        }
+    </style>
+</h:head>
+<f:view>
+    <br/>
+    <p:growl id="messages" showDetail="true"/>
+    <p:toolbar>
+        <p:toolbarGroup>
+            <p:link outcome="index?faces-redirect=true">
+                <p:button icon="pi pi-home" styleClass="ui-button-help"/>
+            </p:link>
+            <p:link outcome="customerList?faces-redirect=true">
+                <p:button icon="pi pi-list" value="Customers" styleClass="ui-button-secondary"/>
+            </p:link>
+        </p:toolbarGroup>
+        <p:toolbarGroup align="right">
+            <h:form>
+                <p:commandButton value="Logout" action="#{loginBB.logout}"/>
+            </h:form>
+        </p:toolbarGroup>
+    </p:toolbar>
+    <br/>
+    <p:panel header="Add new customer">
+        <f:facet name="title">Add new customer</f:facet>
+        <h:form>
+            <div class="p-field p-grid">
+                <label for="firstName" class="p-col-fixed" style="width:100px">Firstname: </label>
+                <div class="p-col">
+                    <p:inputText id="firstName" type="text" value="#{customerEditBB.customer.firstName}" required="true"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="lastName" class="p-col-fixed" style="width:100px">Lastname: </label>
+                <div class="p-col">
+                    <p:inputText id="lastName" type="text" value="#{customerEditBB.customer.lastName}" required="true"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="email" class="p-col-fixed" style="width:100px">Email: </label>
+                <div class="p-col">
+                    <p:inputText id="email" type="text" value="#{customerEditBB.customer.email}" required="true"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="phoneNo" class="p-col-fixed" style="width:100px">Phone no: </label>
+                <div class="p-col">
+                    <p:inputText id="phoneNo" type="text" value="#{customerEditBB.customer.phoneNo}" required="true"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="street" class="p-col-fixed" style="width:100px">Street: </label>
+                <div class="p-col">
+                    <p:inputText id="street" type="text" value="#{customerEditBB.address.street}" required="true"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="postalCode" class="p-col-fixed" style="width:100px">Postal code: </label>
+                <div class="p-col">
+                    <p:inputText id="postalCode" type="text" value="#{customerEditBB.address.postalCode}" required="true"/>
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="city" class="p-col-fixed" style="width:100px">City: </label>
+                <div class="p-col">
+                    <p:inputText id="city" type="text" value="#{customerEditBB.address.city}" required="true"/>
+                </div>
+            </div>
+            <p:commandButton type="submit" icon="pi pi-save" value="Save" action="#{customerEditBB.save(customerEditBB.customer)}" update="@form"/>
+        </h:form>
+    </p:panel>
+</f:view>
+</html>
